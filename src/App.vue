@@ -43,9 +43,9 @@ function togglePosition(name) {
 
 <template>
   <!-- Layout start -->
-  <div class="grid grid-cols-12">
+  <div class="flex">
     <!-- Left side menu start -->
-    <div class="col-span-2 min-h-screen h-full menu">
+    <div class="min-h-screen h-full menu">
       <img src="./assets/logo.svg" class="h-16 w-16 mx-auto mt-16 mb-12" alt="" />
       <ul class="list-none pl-12 menu-list">
         <li class="text-white text-2xl font-semibold flex rounded-tl-3xl rounded-bl-3xl relative menu-item cursor-pointer active ">
@@ -56,13 +56,13 @@ function togglePosition(name) {
               d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
             </svg>
           </div>
-          Home
+          <span>Home</span>
         </li>
       </ul>
     </div>
     <!-- Left side menu end -->
 
-    <div class="col-span-10">
+    <div class="dashboard">
       <!-- TOp navbar start -->
       <div class="px-8 py-4 rounded-br-2xl drop-shadow navbar">
         <div class="flex items-center justify-end cursor-pointer">
@@ -165,8 +165,23 @@ body{
   background-color: #393E46;
 }
 .menu{
+  
   background-color: #171D26;
+  width: 100px;
+  transition: width 0.7s linear;
+  &:hover {
+    width: 250px;
+    .menu-list {
+      span {
+          opacity: 1;
+        }
+    }
+  }
   .menu-list {
+    span{
+      opacity: 0;
+      transition: all 0.3s linear;
+    }
     .active {
       background-color: #393E46;
 
@@ -193,10 +208,15 @@ body{
     }
   }
 }
-.navbar {
-  background-color: #171D26;
+// .menu:hover{
+//   width: 250px;
+// }
+.dashboard {
+  width: 100%;
+  .navbar {
+    background-color: #171D26;
+  }
 }
-
 
 .view-box{
   min-height: 100%;
