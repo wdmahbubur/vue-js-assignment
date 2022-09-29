@@ -4,7 +4,7 @@ import TheWelcome from './components/TheWelcome.vue'
 
 import { ref } from 'vue';
 const orderObject = ref({ user: 1, view: 2 });
-const viewExpand = ref(false);
+const viewExpand = ref(true);
 const userExpand = ref(false);
 
 function toggleView() {
