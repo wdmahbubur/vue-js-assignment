@@ -3,16 +3,42 @@ import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 
 import { ref } from 'vue';
+const orderObject = ref({ user: 1, view: 2 });
 const viewExpand = ref(false);
 const userExpand = ref(false);
 
 function toggleView() {
-  viewExpand.value = !viewExpand.value;
+  if (orderObject.value.view === 2) {
+    viewExpand.value = !viewExpand.value;
+  }
+  userExpand.value = false;
 }
 
 function toggleUser() {
-  userExpand.value = !userExpand.value;
+  if (orderObject.value.user === 2) {
+    userExpand.value = !userExpand.value;
+  }
+  viewExpand.value = false;
 }
+
+function togglePosition(name) {
+  if (name === "user") {
+    if (orderObject.value.user !== 2) {
+      orderObject.value.user = 2;
+      orderObject.value.view = 1;
+      viewExpand.value = false;
+    }
+  }
+  if (name === "view") {
+    if (orderObject.value.view !== 2) {
+      orderObject.value.view = 2;
+      orderObject.value.user = 1;
+      userExpand.value = false;
+    }
+  }
+}
+
+
 </script>
 
 <template>
@@ -53,15 +79,17 @@ function toggleUser() {
       <!-- Top navbar end -->
       <!-- main area start-->
       <div class="p-8">
-        <div class="flex flex-col gap-6">
+        <div class="flex flex-col gap-6 relative">
           <!-- User container start -->
-          <div class="border border-red-700 rounded-3xl">
-            <button class="bg-red-700 text-white w-full py-2 px-4 font-semibold text-xl flex items-center justify-between rounded-tl-3xl rounded-tr-3xl" :class="[userExpand?'':'rounded-bl-3xl rounded-br-3xl']">
+          <div class="border border-red-700 rounded-3xl absolute w-full transition-all duration-1000 ease-linear" :class="[orderObject.user===2?'top-16': 'top-0']">
+            <button class="bg-red-700 text-white w-full py-2 px-4 font-semibold text-xl flex items-center justify-between rounded-tl-3xl rounded-tr-3xl" :class="[userExpand?'':'rounded-bl-3xl rounded-br-3xl']" @click="togglePosition('user')">
               <h4 class="basis-1/2 text-right">User</h4>
               <div class="basis-1/2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 ml-auto" @click="toggleUser">
+                <Transition name="fade">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 ml-auto" @click="toggleUser" v-if="!userExpand">
                   <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
                 </svg>
+                </Transition>
               </div>
             </button>
             <Transition name="userCollapseExpand">
@@ -84,13 +112,15 @@ function toggleUser() {
           </div>
           <!-- User container end -->
           <!-- View container start -->
-          <div class="border border-red-700 rounded-3xl">
-            <button class="bg-red-700 text-white w-full py-2 px-4 font-semibold text-xl flex items-center justify-between rounded-tl-3xl rounded-tr-3xl" :class="[viewExpand?'':'rounded-bl-3xl rounded-br-3xl']">
+          <div class="border border-red-700 rounded-3xl absolute w-full transition-all duration-1000 ease-linear" :class="[orderObject.view===2?'top-16': 'top-0']">
+            <button class="bg-red-700 text-white w-full py-2 px-4 font-semibold text-xl flex items-center justify-between rounded-tl-3xl rounded-tr-3xl" :class="[viewExpand?'':'rounded-bl-3xl rounded-br-3xl']"   @click="togglePosition('view')">
               <h4 class="basis-1/2 text-right">View</h4>
               <div class="basis-1/2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 ml-auto" @click="toggleView">
+                <Transition name="fade">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 ml-auto" @click="toggleView" v-if="!viewExpand">
                   <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
                 </svg>
+                </Transition>
               </div>
             </button>
             <Transition name="viewCollapseExpand">
@@ -167,6 +197,7 @@ body{
   background-color: #171D26;
 }
 
+
 .view-box{
   min-height: 100%;
   height: auto;
@@ -176,16 +207,19 @@ body{
 .viewCollapseExpand-enter-active,
 .viewCollapseExpand-leave-active,
 .userCollapseExpand-enter-active,
-.userCollapseExpand-leave-active{
+.userCollapseExpand-leave-active,
+.fade-enter-active,
+.fade-leave-active {
   transition: all 1s linear;
 }
   
 .viewCollapseExpand-enter-from,
 .viewCollapseExpand-leave-to,
 .userCollapseExpand-enter-from,
-.userCollapseExpand-leave-to{
+.userCollapseExpand-leave-to,
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
   min-height: 0;
 }
-
 </style>
