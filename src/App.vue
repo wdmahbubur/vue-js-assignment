@@ -1,13 +1,13 @@
 <script setup>
 // import 
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import Navbar from './components/Navbar.vue';
 import SideMenu from './components/SideMenu.vue';
 import ViewContainer from './components/ViewContainer.vue';
 import UserContainer from './components/UserContainer.vue';
 
 // state
-const responsiveMenuExpand = ref(false);
+const responsiveMenuExpand = ref(true);
 const orderObject = ref({ user: 1, view: 2 });
 const viewExpand = ref(true);
 const userExpand = ref(false);
@@ -49,6 +49,17 @@ function togglePosition(name) {
   }
 }
 
+onMounted(() => {
+  window.addEventListener('resize', function () {
+    if (this.window.innerWidth<=576) {
+      responsiveMenuExpand.value = false;
+    }
+    if (this.window.innerWidth > 576) {
+      responsiveMenuExpand.value = true;
+    }
+  })
+})
+
 </script>
 
 <template>
@@ -56,7 +67,7 @@ function togglePosition(name) {
   <div class="flex">
          
     <!-- Left side menu start -->
-      <SideMenu :responsiveMenuExpand="responsiveMenuExpand"/>
+      <SideMenu :responsiveMenuExpand="responsiveMenuExpand" :responsiveMenuToggle="responsiveMenuToggle"/>
       <!-- Left side menu end -->
   
       <div class="dashboard pb-4">

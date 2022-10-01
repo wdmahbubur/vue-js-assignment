@@ -11,26 +11,26 @@ body {
     background-color: $secondary-background-color;
     position: fixed;
     width: 100px;
-    transition: width 0.7s linear;
+    transition: all 0.7s linear;
     top: 0;
-    left: 0;
     height: 100%;
 
     &:hover {
-        width: 250px;
-        ~.dashboard{
-            padding-left: 250px;
-        }
-        .menu-list {
-            span {
-                opacity: 1;
+        @media screen and (min-width: $tablet-device-width) {
+            width: 250px;
+            ~.dashboard{
+                padding-left: 250px;
+            }
+            .menu-list {
+                span {
+                    opacity: 1;
+                }
             }
         }
     }
 
     @media screen and (max-width: $mobile-device-width) {
         width: 250px;
-        left: -250px;
         z-index: 10000;
     }
 

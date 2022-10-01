@@ -9,7 +9,7 @@ defineProps({
 <template>
     <div class="px-2 py-4 rounded-br-2xl drop-shadow navbar">
         <div class="flex items-center justify-between md:justify-end">
-            <div class="md:hidden cursor-pointer" @click="responsiveMenuToggle">
+            <div class="sm:hidden cursor-pointer" @click="responsiveMenuToggle">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff"
                     class="w-10 h-10">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />

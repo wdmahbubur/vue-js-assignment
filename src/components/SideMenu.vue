@@ -3,12 +3,22 @@ defineProps({
     responsiveMenuExpand: {
         type: Boolean,
         required: true,
+    },
+    responsiveMenuToggle: {
+        required: true
     }
 })
 </script>
 
 <template>
-    <div class="min-h-screen h-full menu" :class="[responsiveMenuExpand?'left-0':'-left-full']">
+    <div class="min-h-screen h-full relative menu" :class="[responsiveMenuExpand?'left-0':'-left-full']">
+        <div class="sm:hidden absolute right-3 top-3 cursor-pointer" @click="responsiveMenuToggle">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff"
+                class="w-7 h-7">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
+        </div>
         <img src="./../assets/logo.svg" class="h-16 w-16 mx-auto mt-16 mb-12" alt="" />
         <ul class="list-none pl-12 menu-list">
             <li
