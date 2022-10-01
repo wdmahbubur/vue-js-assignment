@@ -15,7 +15,6 @@ const userExpand = ref(false);
 // methods
 function responsiveMenuToggle(){
   responsiveMenuExpand.value = !responsiveMenuExpand.value;
-  console.log(responsiveMenuExpand.value);
 }
 
 function toggleView() {
