@@ -7,11 +7,17 @@ import ViewContainer from './components/ViewContainer.vue';
 import UserContainer from './components/UserContainer.vue';
 
 // state
+const responsiveMenuExpand = ref(false);
 const orderObject = ref({ user: 1, view: 2 });
 const viewExpand = ref(true);
 const userExpand = ref(false);
 
 // methods
+function responsiveMenuToggle(){
+  responsiveMenuExpand.value = !responsiveMenuExpand.value;
+  console.log(responsiveMenuExpand.value);
+}
+
 function toggleView() {
   if (orderObject.value.view === 2) {
     viewExpand.value = !viewExpand.value;
@@ -48,13 +54,14 @@ function togglePosition(name) {
 <template>
   <!-- Layout start -->
   <div class="flex">
+         
     <!-- Left side menu start -->
-      <SideMenu/>
-    <!-- Left side menu end -->
-
-    <div class="dashboard pb-4">
+      <SideMenu :responsiveMenuExpand="responsiveMenuExpand"/>
+      <!-- Left side menu end -->
+  
+      <div class="dashboard pb-4">
       <!-- Top navbar start -->
-        <Navbar/>
+        <Navbar :responsiveMenuToggle="responsiveMenuToggle"/>
       <!-- Top navbar end -->
       <!-- main area start-->
       <div class="p-8">

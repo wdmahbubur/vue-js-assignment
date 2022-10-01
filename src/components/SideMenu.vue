@@ -1,9 +1,14 @@
 <script setup>
-
+defineProps({
+    responsiveMenuExpand: {
+        type: Boolean,
+        required: true,
+    }
+})
 </script>
 
 <template>
-    <div class="min-h-screen h-full menu">
+    <div class="min-h-screen h-full menu" :class="[responsiveMenuExpand?'left-0':'-left-full']">
         <img src="./../assets/logo.svg" class="h-16 w-16 mx-auto mt-16 mb-12" alt="" />
         <ul class="list-none pl-12 menu-list">
             <li
