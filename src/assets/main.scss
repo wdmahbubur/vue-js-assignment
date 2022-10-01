@@ -1,0 +1,115 @@
+$main-background-color: #393E46;
+$secondary-background-color: #171D26;
+$mobile-device-width: 576px;
+$tablet-device-width: 768px;
+
+body {
+    background-color: $main-background-color;
+}
+
+.menu {
+    background-color: $secondary-background-color;
+    position: fixed;
+    width: 100px;
+    transition: width 0.7s linear;
+    top: 0;
+    left: 0;
+    height: 100%;
+
+    &:hover {
+        width: 250px;
+        ~.dashboard{
+            padding-left: 250px;
+        }
+        .menu-list {
+            span {
+                opacity: 1;
+            }
+        }
+    }
+
+    @media screen and (max-width: $mobile-device-width) {
+        width: 250px;
+        left: -250px;
+        z-index: 10000;
+    }
+
+    .menu-list {
+        span {
+            opacity: 0;
+            transition: all 0.3s linear;
+            @media screen and (max-width: $mobile-device-width) {
+                opacity: 1;
+            } 
+        }
+
+        .active {
+            background-color: $main-background-color;
+
+            @media screen and (max-width: $mobile-device-width) {
+                background-color: #393E46;
+            }
+
+            ::after,
+            ::before {
+                content: "";
+                height: 40px;
+                width: 40px;
+                position: absolute;
+                background: none;
+                border-radius: 50%;
+                right: 0;
+                @media screen and (max-width: $mobile-device-width) {
+                        display: none;
+                    }
+            }
+
+            ::before {
+                top: -40px;
+                box-shadow: 17px 17px 0px -2px $main-background-color;
+            }
+
+            ::after {
+                bottom: -40px;
+                box-shadow: 17px -17px 0px -2px $main-background-color;
+            }
+        }
+    }
+}
+
+.dashboard {
+    width: 100%;
+    padding-left: 100px;
+    transition: all 0.7s linear;
+    @media screen and (max-width: $mobile-device-width) {
+        padding-left: 0px;
+    }
+    .navbar {
+        background-color: $secondary-background-color;
+    }
+}
+
+.view-box {
+    min-height: 100%;
+    height: auto;
+    opacity: 1;
+}
+
+.viewCollapseExpand-enter-active,
+.viewCollapseExpand-leave-active,
+.userCollapseExpand-enter-active,
+.userCollapseExpand-leave-active,
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 1s linear;
+}
+
+.viewCollapseExpand-enter-from,
+.viewCollapseExpand-leave-to,
+.userCollapseExpand-enter-from,
+.userCollapseExpand-leave-to,
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+    min-height: 0;
+}
