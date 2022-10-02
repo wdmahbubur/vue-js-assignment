@@ -7,7 +7,7 @@ import ViewContainer from './components/ViewContainer.vue';
 import UserContainer from './components/UserContainer.vue';
 
 // state
-const responsiveMenuExpand = ref(true);
+const responsiveMenuExpand = ref(false);
 const orderObject = ref({ user: 1, view: 2 });
 const viewExpand = ref(true);
 const userExpand = ref(false);
@@ -49,6 +49,12 @@ function togglePosition(name) {
 }
 
 onMounted(() => {
+  if (window.innerWidth <= 576) {
+    responsiveMenuExpand.value = false;
+  }
+  if (window.innerWidth > 576) {
+    responsiveMenuExpand.value = true;
+  }
   window.addEventListener('resize', function () {
     if (this.window.innerWidth<=576) {
       responsiveMenuExpand.value = false;
